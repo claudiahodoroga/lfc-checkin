@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Liffey Founders Club — Pre-Event Check-In</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FAF9F6;
+      --surface: #FFFFFF;
+      --surface-subtle: #F3F1EC;
+      --ink: #171614;
+      --ink-muted: #5E5B55;
+      --border: #E2DFD7;
+      --accent: #FF5A36;
+      --accent-dark: #D94120;
+      --accent-soft: #FFF0EC;
+      --teal: #0F766E;
+      --teal-soft: #CCFBF1;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --shadow-tactile: 0 4px 0 #171614;
+      --shadow-tactile-sm: 0 3px 0 #171614;
+      --shadow-tactile-accent: 0 4px 0 #9A2910;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      background-image: radial-gradient(#DCD8CE 1px, transparent 1px);
+      background-size: 20px 20px;
+      color: var(--ink);
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    .serif {
+      font-family: 'Instrument Serif', Georgia, serif;
+      letter-spacing: -0.01em;
+    }
+
+    /* Header & Progress */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(250, 249, 246, 0.92);
+      backdrop-filter: blur(10px);
+      padding: 16px 20px 12px;
+      border-bottom: 1px solid rgba(226, 223, 215, 0.7);
+    }
+
+    .header-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .brand-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    .brand-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 1.5px solid var(--ink);
+    }
+
+    .step-counter {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink-muted);
+      background: var(--surface);
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1.5px solid var(--ink);
+    }
+
+    .stage-pills {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .stage-pill {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .stage-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--ink-muted);
+      transition: color 0.2s;
+    }
+
+    .stage-pill.active .stage-label,
+    .stage-pill.done .stage-label {
+      color: var(--ink);
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: var(--border);
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid rgba(23, 22, 20, 0.15);
+    }
+
+    .stage-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--accent);
+      border-radius: 999px;
+      transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .stage-pill.done .stage-fill {
+      background: var(--teal);
+      width: 100% !important;
+    }
+
+    /* Main Container */
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 20px 100px;
+    }
+
+    .card-stage {
+      width: 100%;
+      max-width: 600px;
+      position: relative;
+    }
+
+    .slide {
+      animation: slideIn 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .slide.back {
+      animation: slideInBack 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(14px) scale(0.985); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes slideInBack {
+      from { opacity: 0; transform: translateY(-14px) scale(0.985); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .q-eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-dark);
+      background: var(--accent-soft);
+      border: 1.5px solid var(--ink);
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    .q-title {
+      font-size: clamp(26px, 5vw, 34px);
+      line-height: 1.18;
+      font-weight: 800;
+      color: var(--ink);
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+
+    .q-subtitle {
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--ink-muted);
+      margin-bottom: 24px;
+    }
+
+    /* Welcome Screen */
+    .welcome-box {
+      background: var(--surface);
+      border: 2px solid var(--ink);
+      border-radius: 26px;
+      padding: 36px 28px;
+      box-shadow: 0 6px 0 var(--ink);
+    }
+
+    .welcome-title {
+      font-size: clamp(36px, 7vw, 48px);
+      line-height: 1.05;
+      margin-bottom: 16px;
+      font-weight: 400;
+    }
+
+    .welcome-desc {
+      font-size: 17px;
+      line-height: 1.55;
+      color: var(--ink-muted);
+      margin-bottom: 28px;
+    }
+
+    /* Tactile Choice Cards */
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .option-card {
+      width: 100%;
+      text-align: left;
+      background: var(--surface);
+      border: 2px solid var(--ink);
+      border-radius: var(--radius-md);
+      padding: 15px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+      box-shadow: var(--shadow-tactile-sm);
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.15s ease;
+      font-family: inherit;
+      color: var(--ink);
+    }
+
+    .option-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 0 var(--ink);
+      background: #FFFEFC;
+    }
+
+    .option-card:active {
+      transform: translateY(2px);
+      box-shadow: 0 1px 0 var(--ink);
+    }
+
+    .option-card.selected {
+      background: var(--accent-soft);
+      border-color: var(--ink);
+      box-shadow: 0 3px 0 var(--accent-dark);
+    }
+
+    .option-emoji {
+      font-size: 24px;
+      line-height: 1;
+      flex-shrink: 0;
+      width: 38px;
+      height: 38px;
+      background: var(--surface-subtle);
+      border: 1.5px solid var(--ink);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .option-card.selected .option-emoji {
+      background: var(--surface);
+    }
+
+    .option-text {
+      flex: 1;
+    }
+
+    .option-title {
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 1.3;
+    }
+
+    .option-desc {
+      font-size: 13.5px;
+      color: var(--ink-muted);
+      margin-top: 2px;
+      line-height: 1.35;
+    }
+
+    .option-key {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--ink-muted);
+      border: 1.5px solid var(--border);
+      background: var(--surface-subtle);
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .option-card.selected .option-key {
+      background: var(--accent);
+      color: #FFF;
+      border-color: var(--ink);
+    }
+
+    /* Emoji Reaction Scale (Q8) */
+    .scale-wrap {
+      background: var(--surface);
+      border: 2px solid var(--ink);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: var(--shadow-tactile);
+    }
+
+    .scale-buttons {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .scale-btn {
+      background: var(--surface-subtle);
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      padding: 14px 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      box-shadow: 0 3px 0 var(--ink);
+      transition: all 0.12s ease;
+      font-family: inherit;
+    }
+
+    .scale-btn:hover {
+      transform: translateY(-2px);
+      background: #FFF;
+    }
+
+    .scale-btn.selected {
+      background: var(--accent);
+      color: #FFF;
+      transform: translateY(1px);
+      box-shadow: 0 2px 0 var(--ink);
+    }
+
+    .scale-btn .emoji {
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .scale-btn .num {
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .scale-caption {
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      min-height: 22px;
+      padding-top: 4px;
+      border-top: 1px dashed var(--border);
+    }
+
+    /* Tappable Tag Cloud (Q9) */
+    .tags-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-bottom: 14px;
+    }
+
+    .tag-pill {
+      background: var(--surface);
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      padding: 9px 15px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      cursor: pointer;
+      box-shadow: 0 2px 0 var(--ink);
+      transition: all 0.12s ease;
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tag-pill:hover {
+      transform: translateY(-1px);
+      background: #FFF;
+    }
+
+    .tag-pill.selected {
+      background: var(--teal);
+      color: #FFF;
+      box-shadow: 0 2px 0 #064E3B;
+    }
+
+    .tag-count {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink-muted);
+    }
+
+    /* Text Inputs */
+    .text-input {
+      width: 100%;
+      background: var(--surface);
+      border: 2px solid var(--ink);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      font-size: 16px;
+      font-family: inherit;
+      color: var(--ink);
+      box-shadow: var(--shadow-tactile-sm);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .text-input:focus {
+      background: #FFF;
+      box-shadow: 0 4px 0 var(--accent);
+    }
+
+    .text-input::placeholder {
+      color: #9A958C;
+    }
+
+    /* Primary & Secondary Action Buttons */
+    .btn-primary {
+      background: var(--accent);
+      color: #FFFFFF;
+      border: 2px solid var(--ink);
+      border-radius: var(--radius-md);
+      padding: 15px 24px;
+      font-size: 16px;
+      font-weight: 800;
+      font-family: inherit;
+      cursor: pointer;
+      box-shadow: var(--shadow-tactile);
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 0 var(--ink);
+    }
+
+    .btn-primary:active {
+      transform: translateY(2px);
+      box-shadow: 0 1px 0 var(--ink);
+    }
+
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--ink);
+      border: 2px solid var(--ink);
+      border-radius: var(--radius-md);
+      padding: 13px 18px;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      box-shadow: var(--shadow-tactile-sm);
+      transition: all 0.12s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-secondary:hover {
+      background: var(--surface-subtle);
+    }
+
+    /* Footer Navigation */
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(250, 249, 246, 0.94);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid var(--border);
+      padding: 12px 20px;
+      z-index: 20;
+    }
+
+    .footer-inner {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .hint-text {
+      font-size: 12px;
+      color: var(--ink-muted);
+      font-weight: 600;
+    }
+
+    /* Archetype Result Card */
+    .result-card {
+      background: var(--surface);
+      border: 2px solid var(--ink);
+      border-radius: 26px;
+      padding: 28px 24px;
+      box-shadow: 0 6px 0 var(--ink);
+      margin-bottom: 16px;
+    }
+
+    .archetype-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--teal-soft);
+      color: var(--teal);
+      border: 1.5px solid var(--ink);
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 14px;
+    }
+
+    .archetype-emoji {
+      font-size: 48px;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .archetype-name {
+      font-size: clamp(32px, 6vw, 42px);
+      line-height: 1.08;
+      margin-bottom: 8px;
+      font-weight: 400;
+    }
+
+    .archetype-tagline {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--accent-dark);
+      margin-bottom: 14px;
+    }
+
+    .archetype-desc {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--ink-muted);
+      margin-bottom: 18px;
+    }
+
+    .trait-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .trait-chip {
+      background: var(--surface-subtle);
+      border: 1.5px solid var(--ink);
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 12.5px;
+      font-weight: 700;
+    }
+
+    .share-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding-top: 16px;
+      border-top: 1.5px dashed var(--border);
+    }
+
+    .save-status {
+      margin-top: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--teal);
+      text-align: center;
+      min-height: 18px;
+    }
+
+    @media (max-width: 480px) {
+      .option-key, .hint-text { display: none; }
+      .welcome-box { padding: 28px 20px; }
+      .share-actions { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header id="app-header" style="display:none;">
+    <div class="header-inner">
+      <div class="header-top">
+        <div class="brand-pill"><span class="brand-dot"></span> Liffey Founders Club</div>
+        <div class="step-counter" id="step-counter">1 / 12</div>
+      </div>
+      <div class="stage-pills">
+        <div class="stage-pill" id="stage-0">
+          <span class="stage-label">1. Vibe Check</span>
+          <div class="stage-bar"><div class="stage-fill" id="fill-0"></div></div>
+        </div>
+        <div class="stage-pill" id="stage-1">
+          <span class="stage-label">2. Your Style</span>
+          <div class="stage-bar"><div class="stage-fill" id="fill-1"></div></div>
+        </div>
+        <div class="stage-pill" id="stage-2">
+          <span class="stage-label">3. Snapshot</span>
+          <div class="stage-bar"><div class="stage-fill" id="fill-2"></div></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="card-stage" id="stage-container"></div>
+  </main>
+
+  <footer id="app-footer" style="display:none;">
+    <div class="footer-inner">
+      <button type="button" class="btn-secondary" id="btn-back">← Back</button>
+      <span class="hint-text" id="footer-hint">Press Enter ↵ to continue</span>
+      <button type="button" class="btn-primary" id="btn-next" style="width:auto; padding: 13px 24px;">Next →</button>
+    </div>
+  </footer>
+
+  <script>
+    /**
+     * ============================================================================
+     * DATABASE SUBMISSION HOOK (Vercel Serverless Proxy -> Supabase)
+     * ============================================================================
+     * Posts to /api/submit so your Supabase URL & key stay in Vercel env vars.
+     */
+    async function submitSurveyData(payload) {
+      console.log("LFC Survey Payload:", JSON.stringify(payload, null, 2));
+
+      // Local file:// preview fallback when testing offline before deploying
+      if (window.location.protocol === "file:") {
+        return { ok: true, mode: "local_demo" };
+      }
+
+      try {
+        const res = await fetch("/api/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        return { ok: res.ok, mode: "vercel_proxy" };
+      } catch (err) {
+        console.error("Submission error:", err);
+        return { ok: false, error: err.message };
+      }
+    }
+
+    /**
+     * ============================================================================
+     * SURVEY QUESTIONS & REFINED COPY
+     * ============================================================================
+     */
+    const STARTUP_TERMS = [
+      "Elevator Pitch", "MVP", "Customer Discovery", "Product-Market Fit",
+      "Value Proposition", "Pivot", "B2B / B2C", "Bootstrapping",
+      "ROI", "CAC (Acquisition Cost)", "LTV (Lifetime Value)", "Churn Rate",
+      "Burn Rate & Runway", "TAM (Market Size)", "SAFE Note", "Vesting Cliff",
+      "Cap Table", "Pre/Post-Money Valuation", "Dilution & Option Pool"
+    ];
+
+    const QUESTIONS = [
+      {
+        id: "attendance_history",
+        stage: 0,
+        type: "single",
+        autoAdvance: true,
+        eyebrow: "Question 1",
+        title: "Have you been to a Liffey Founders Club night before?",
+        subtitle: "Helps us skip questions that don't apply to you.",
+        options: [
+          { value: "First-timer", emoji: "🌱", label: "First-timer", desc: "Next week is my first one" },
+          { value: "2-3 times", emoji: "🔄", label: "Been a couple of times", desc: "2–3 events so far" },
+          { value: "Regular (4+)", emoji: "🏛️", label: "Regular", desc: "4+ events under my belt" }
+        ]
+      },
+      {
+        id: "past_experience_vibe",
+        stage: 0,
+        type: "single",
+        autoAdvance: true,
+        condition: (ans) => ans.attendance_history && ans.attendance_history !== "First-timer",
+        eyebrow: "Question 2 • Repeat Attendees",
+        title: "Honestly, how have past sessions felt for you?",
+        subtitle: "No sugarcoating needed.",
+        options: [
+          { value: "Energizing", emoji: "⚡", label: "Energizing", desc: "I usually leave with fresh momentum" },
+          { value: "Valuable", emoji: "🤝", label: "Valuable", desc: "I've met people who genuinely helped my project" },
+          { value: "A bit repetitive", emoji: "🔁", label: "A bit repetitive", desc: "I keep having the same surface-level chats" },
+          { value: "Slightly awkward", emoji: "😬", label: "Slightly awkward", desc: "It's hard to break into established circles" },
+          { value: "Mixed bag", emoji: "🎲", label: "Mixed bag", desc: "Some great chats, some forgettable ones" }
+        ]
+      },
+      {
+        id: "attending_with",
+        stage: 0,
+        type: "single",
+        autoAdvance: true,
+        eyebrow: "Question 3",
+        title: "Who are you coming with next week?",
+        subtitle: "Helps us plan the room flow.",
+        options: [
+          { value: "Flying solo", emoji: "🚶", label: "Flying solo", desc: "Showing up on my own" },
+          { value: "With someone I know", emoji: "👯", label: "With someone I know", desc: "Bringing a friend or co-founder" },
+          { value: "Looking for a teammate", emoji: "👋", label: "Looking for a teammate", desc: "Coming solo, hoping to meet a collaborator" }
+        ]
+      },
+      {
+        id: "builder_status",
+        stage: 1,
+        type: "single",
+        autoAdvance: true,
+        eyebrow: "Question 4",
+        title: "What's your current builder status?",
+        subtitle: "Wherever you're at is completely welcome.",
+        options: [
+          { value: "Early ideas", emoji: "💡", label: "Early ideas", desc: "Still brainstorming, nothing built yet" },
+          { value: "Building an MVP", emoji: "🛠️", label: "Building an MVP", desc: "Actively coding, designing, or prototyping" },
+          { value: "Running a startup", emoji: "🚀", label: "Running a startup", desc: "Already launched or operating" },
+          { value: "Just exploring", emoji: "🧭", label: "Just exploring", desc: "Here to learn, invest, or collaborate" }
+        ]
+      },
+      {
+        id: "preferred_pitch_format",
+        stage: 1,
+        type: "single",
+        autoAdvance: true,
+        eyebrow: "Question 5",
+        title: "Imagine you have a rough, half-baked idea. What would actually make you share it?",
+        subtitle: "Pick the format that feels most natural.",
+        options: [
+          { value: "Open mic rush", emoji: "🏃", label: "Open mic rush", desc: "Let anyone grab the mic voluntarily" },
+          { value: "Low-stakes lottery", emoji: "🎲", label: "Low-stakes lottery", desc: "Names drawn at random for a casual 60-second share" },
+          { value: "Small table circles", emoji: "🪑", label: "Small table circles", desc: "Sharing with 4–5 peers at a table instead of the whole room" },
+          { value: "Listener mode", emoji: "🤐", label: "Listener mode", desc: "I'd rather give feedback than pitch right now" }
+        ]
+      },
+      {
+        id: "feedback_goal",
+        stage: 1,
+        type: "single",
+        autoAdvance: true,
+        eyebrow: "Question 6",
+        title: "When you talk about an idea at an event, what are you actually hoping to get out of it?",
+        subtitle: "Pick whichever feels closest right now.",
+        options: [
+          { value: "Encouragement", emoji: "📣", label: "Encouragement", desc: "Hearing that I'm onto something worth pursuing" },
+          { value: "Honest pushback", emoji: "🔍", label: "Honest pushback", desc: "Finding out what could go wrong before I waste time" },
+          { value: "Practical help", emoji: "🧩", label: "Practical help", desc: "Advice on a specific blocker (tech, users, or funding)" }
+        ]
+      },
+      {
+        id: "desired_perspectives",
+        stage: 1,
+        type: "multi",
+        maxSelect: 3,
+        eyebrow: "Question 7 • Pick up to 3",
+        title: "Whose perspective would be most useful to you next week?",
+        subtitle: "Helps us know what mix of people to bring together.",
+        options: [
+          { value: "Same industry peers", emoji: "🎯", label: "People in my exact industry", desc: "Folks who already know the space" },
+          { value: "Other industries", emoji: "🌍", label: "Builders from other industries", desc: "Fresh eyes with zero assumptions" },
+          { value: "Everyday users", emoji: "🗣️", label: "Potential everyday users", desc: "Honest customer gut-checks" },
+          { value: "Technical builders", emoji: "💻", label: "Technical builders", desc: "Engineers, designers, and product folks" },
+          { value: "Business & commercial", emoji: "📈", label: "Business & commercial minds", desc: "Sales, ops, and early-stage investors" }
+        ]
+      },
+      {
+        id: "investor_comfort",
+        stage: 1,
+        type: "scale",
+        autoAdvance: true,
+        eyebrow: "Question 8",
+        title: "How comfortable do you feel sharing an unfinished project in front of investors or experienced founders?",
+        subtitle: "Tap the reaction that matches your gut feeling.",
+        scale: [
+          { value: 1, emoji: "🥶", label: "Not at all — needs to be polished first" },
+          { value: 2, emoji: "😬", label: "A bit hesitant — only if I know the room well" },
+          { value: 3, emoji: "😐", label: "Depends on the vibe that night" },
+          { value: 4, emoji: "🙂", label: "Pretty chill — happy to share rough notes" },
+          { value: 5, emoji: "😎", label: "Totally fine — rough feedback is the whole point" }
+        ]
+      },
+      {
+        id: "startup_literacy",
+        stage: 2,
+        type: "tags",
+        eyebrow: "Question 9",
+        title: "Which of these startup terms could you explain to a friend over coffee?",
+        subtitle: "Tap everything you feel comfortable with (skip what you don't).",
+        tags: STARTUP_TERMS
+      },
+      {
+        id: "role_industry",
+        stage: 2,
+        type: "text",
+        eyebrow: "Question 10",
+        title: "What do you currently do day-to-day?",
+        subtitle: "Role & industry — e.g., 'Product Designer in FinTech' or 'CS Student'.",
+        placeholder: "Type your role and industry..."
+      },
+      {
+        id: "gender_identity",
+        stage: 2,
+        type: "single_with_other",
+        autoAdvance: true,
+        eyebrow: "Question 11 • Optional",
+        title: "How do you identify?",
+        subtitle: "Helps us make sure the room reflects everyone in Dublin.",
+        options: [
+          { value: "Woman", emoji: "✦", label: "Woman" },
+          { value: "Man", emoji: "✦", label: "Man" },
+          { value: "Non-binary", emoji: "✦", label: "Non-binary" },
+          { value: "Prefer not to say", emoji: "✦", label: "Prefer not to say" },
+          { value: "Other", emoji: "✎", label: "Self-describe" }
+        ]
+      },
+      {
+        id: "follow_up_testing",
+        stage: 2,
+        type: "text",
+        isLast: true,
+        eyebrow: "Question 12 • Last one",
+        title: "Want to help us test new formats after next week's event?",
+        subtitle: "Drop an email or LinkedIn/X handle if you're open to a quick 5-minute chat (optional).",
+        placeholder: "you@example.com or @handle"
+      }
+    ];
+
+    /**
+     * ============================================================================
+     * STATE & NAVIGATION
+     * ============================================================================
+     */
+    const state = {
+      screen: "welcome", // "welcome" | "survey" | "result"
+      currentIndex: 0,
+      direction: "forward",
+      answers: {
+        desired_perspectives: [],
+        startup_literacy: []
+      },
+      otherIdentityText: "",
+      archetype: null
+    };
+
+    function getActiveQuestions() {
+      return QUESTIONS.filter(q => !q.condition || q.condition(state.answers));
+    }
+
+    function computeArchetype(ans) {
+      const pitch = ans.preferred_pitch_format;
+      const goal = ans.feedback_goal;
+      const status = ans.builder_status;
+      const comfort = ans.investor_comfort || 3;
+
+      if (pitch === "Open mic rush" || comfort >= 4) {
+        return {
+          emoji: "⚡",
+          name: "The Bold Stage-Runner",
+          tagline: "High energy, bias for action, ready for the spotlight.",
+          description: "You thrive when the stakes are live and aren't afraid to put an unpolished idea in front of a crowd. Next week, your challenge is to seek out someone from a completely different industry to stress-test your blind spots.",
+          traits: ["Mic-Ready", "Fast Mover", "High Conviction"]
+        };
+      }
+      if (goal === "Honest pushback") {
+        return {
+          emoji: "🔍",
+          name: "The Pragmatic Validator",
+          tagline: "Allergic to fluff, hungry for real-world truth.",
+          description: "You don't show up for empty applause—you want to know where your idea breaks before you spend six months building it. Small, focused table conversations with honest peers are your sweet spot.",
+          traits: ["Truth-Seeker", "Analytical", "Low-Ego Builder"]
+        };
+      }
+      if (pitch === "Listener mode" || status === "Just exploring") {
+        return {
+          emoji: "🧭",
+          name: "The Connector & Catalyst",
+          tagline: "Sharp listener, cross-pollinator, high-signal conversationalist.",
+          description: "You bring out the best in other builders by asking the questions they haven't thought of yet. Rooms like Liffey Founders Club run on people who listen deeply and connect dots across industries.",
+          traits: ["Deep Listener", "Dot-Connector", "High Empathy"]
+        };
+      }
+      return {
+        emoji: "📐",
+        name: "The Quiet Architect",
+        tagline: "Thoughtful, observant, building substance over hype.",
+        description: "You prefer depth over small talk and want your work to speak louder than a 60-second pitch. Lower-stakes circles and cross-disciplinary chats will give you the exact spark you're looking for next week.",
+        traits: ["Deep Thinker", "Craft-Focused", "Cross-Disciplinary"]
+      };
+    }
+
+    /**
+     * ============================================================================
+     * SHAREABLE IMAGE CARD GENERATOR (HTML5 Canvas -> PNG Download / Native Share)
+     * ============================================================================
+     */
+    function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight) {
+      const words = text.split(" ");
+      let line = "";
+      let currentY = y;
+      for (let n = 0; n < words.length; n++) {
+        const testLine = line + words[n] + " ";
+        const metrics = ctx.measureText(testLine);
+        if (metrics.width > maxWidth && n > 0) {
+          ctx.fillText(line.trim(), x, currentY);
+          line = words[n] + " ";
+          currentY += lineHeight;
+        } else {
+          line = testLine;
+        }
+      }
+      ctx.fillText(line.trim(), x, currentY);
+      return currentY;
+    }
+
+    async function downloadArchetypeCard() {
+      const arch = state.archetype;
+      if (!arch) return;
+
+      const canvas = document.createElement("canvas");
+      canvas.width = 1080;
+      canvas.height = 1080;
+      const ctx = canvas.getContext("2d");
+
+      // Background
+      ctx.fillStyle = "#FAF9F6";
+      ctx.fillRect(0, 0, 1080, 1080);
+
+      // Subtle dot pattern
+      ctx.fillStyle = "#DCD8CE";
+      for (let x = 40; x < 1080; x += 36) {
+        for (let y = 40; y < 1080; y += 36) {
+          ctx.beginPath();
+          ctx.arc(x, y, 2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      // Main Card Shadow
+      ctx.fillStyle = "#171614";
+      ctx.beginPath();
+      ctx.roundRect(96, 112, 900, 870, 44);
+      ctx.fill();
+
+      // Main Card Surface
+      ctx.fillStyle = "#FFFFFF";
+      ctx.strokeStyle = "#171614";
+      ctx.lineWidth = 6;
+      ctx.beginPath();
+      ctx.roundRect(80, 96, 900, 870, 44);
+      ctx.fill();
+      ctx.stroke();
+
+      // Header Pill
+      ctx.fillStyle = "#CCFBF1";
+      ctx.beginPath();
+      ctx.roundRect(140, 156, 390, 52, 26);
+      ctx.fill();
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+      ctx.fillStyle = "#0F766E";
+      ctx.font = "800 22px 'Plus Jakarta Sans', sans-serif";
+      ctx.fillText("LIFFEY FOUNDERS CLUB", 168, 190);
+
+      // Emoji
+      ctx.font = "110px sans-serif";
+      ctx.fillText(arch.emoji, 140, 340);
+
+      // Archetype Title
+      ctx.fillStyle = "#171614";
+      ctx.font = "400 78px 'Instrument Serif', Georgia, serif";
+      ctx.fillText(arch.name, 140, 440);
+
+      // Tagline
+      ctx.fillStyle = "#D94120";
+      ctx.font = "700 30px 'Plus Jakarta Sans', sans-serif";
+      wrapCanvasText(ctx, arch.tagline, 140, 505, 780, 42);
+
+      // Description
+      ctx.fillStyle = "#5E5B55";
+      ctx.font = "500 28px 'Plus Jakarta Sans', sans-serif";
+      wrapCanvasText(ctx, arch.description, 140, 610, 780, 42);
+
+      // Trait Chips
+      let chipX = 140;
+      const chipY = 815;
+      ctx.font = "700 24px 'Plus Jakarta Sans', sans-serif";
+      arch.traits.forEach(trait => {
+        const textW = ctx.measureText(trait).width;
+        const boxW = textW + 44;
+        ctx.fillStyle = "#F3F1EC";
+        ctx.strokeStyle = "#171614";
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.roundRect(chipX, chipY, boxW, 54, 16);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = "#171614";
+        ctx.fillText(trait, chipX + 22, chipY + 35);
+        chipX += boxW + 18;
+      });
+
+      // Trigger download or mobile Web Share
+      canvas.toBlob(async (blob) => {
+        const file = new File([blob], "liffey-founders-archetype.png", { type: "image/png" });
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          try {
+            await navigator.share({
+              files: [file],
+              title: `My Liffey Founders Club Profile: ${arch.name}`,
+              text: `I got "${arch.name}" on the Liffey Founders Club check-in!`
+            });
+            return;
+          } catch (e) { /* Fallback to download if cancelled */ }
+        }
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "liffey-founders-archetype.png";
+        a.click();
+        URL.revokeObjectURL(url);
+      });
+    }
+
+    /**
+     * ============================================================================
+     * RENDERING ENGINE
+     * ============================================================================
+     */
+    const stageContainer = document.getElementById("stage-container");
+    const appHeader = document.getElementById("app-header");
+    const appFooter = document.getElementById("app-footer");
+    const stepCounter = document.getElementById("step-counter");
+    const btnBack = document.getElementById("btn-back");
+    const btnNext = document.getElementById("btn-next");
+
+    function updateProgressUI(activeQuestions) {
+      const q = activeQuestions[state.currentIndex];
+      stepCounter.textContent = `${state.currentIndex + 1} / ${activeQuestions.length}`;
+
+      [0, 1, 2].forEach(stageIdx => {
+        const pill = document.getElementById(`stage-${stageIdx}`);
+        const fill = document.getElementById(`fill-${stageIdx}`);
+        pill.classList.remove("active", "done");
+
+        const stageQuestions = activeQuestions.filter(item => item.stage === stageIdx);
+        const currentStagePos = stageQuestions.findIndex(item => item.id === q.id);
+
+        if (stageIdx < q.stage) {
+          pill.classList.add("done");
+          fill.style.width = "100%";
+        } else if (stageIdx === q.stage) {
+          pill.classList.add("active");
+          const pct = Math.round(((currentStagePos + 1) / stageQuestions.length) * 100);
+          fill.style.width = `${pct}%`;
+        } else {
+          fill.style.width = "0%";
+        }
+      });
+
+      btnBack.style.visibility = state.currentIndex === 0 ? "hidden" : "visible";
+      btnNext.textContent = q.isLast ? "Finish & See Profile ✨" : "Next →";
+    }
+
+    function renderWelcome() {
+      appHeader.style.display = "none";
+      appFooter.style.display = "none";
+      stageContainer.innerHTML = `
+        <div class="slide">
+          <div class="welcome-box">
+            <h1 class="welcome-title serif">Liffey Founders Club</h1>
+            <p class="welcome-desc">A quick, 2-minute check-in on how you like to build, network, and share ideas.</p>
+            <button type="button" class="btn-primary" id="btn-start">Start Check-in →</button>
+          </div>
+        </div>
+      `;
+      document.getElementById("btn-start").addEventListener("click", () => {
+        state.screen = "survey";
+        state.currentIndex = 0;
+        render();
+      });
+    }
+
+    function renderQuestion() {
+      const activeQuestions = getActiveQuestions();
+      if (state.currentIndex >= activeQuestions.length) {
+        state.currentIndex = activeQuestions.length - 1;
+      }
+      const q = activeQuestions[state.currentIndex];
+
+      appHeader.style.display = "block";
+      appFooter.style.display = "block";
+      updateProgressUI(activeQuestions);
+
+      let inputHTML = "";
+      const keys = ["A", "B", "C", "D", "E", "F"];
+
+      if (q.type === "single" || q.type === "single_with_other") {
+        const currentVal = state.answers[q.id];
+        inputHTML = `<div class="options-grid">` + q.options.map((opt, idx) => {
+          const isSelected = currentVal === opt.value;
+          return `
+            <button type="button" class="option-card ${isSelected ? "selected" : ""}" data-val="${opt.value}">
+              <span class="option-emoji">${opt.emoji}</span>
+              <div class="option-text">
+                <div class="option-title">${opt.label}</div>
+                ${opt.desc ? `<div class="option-desc">${opt.desc}</div>` : ""}
+              </div>
+              <span class="option-key">${keys[idx]}</span>
+            </button>
+          `;
+        }).join("") + `</div>`;
+
+        if (q.type === "single_with_other" && currentVal === "Other") {
+          inputHTML += `
+            <div style="margin-top: 14px;">
+              <input type="text" class="text-input" id="other-identity-input" placeholder="How do you identify?" value="${state.otherIdentityText}" />
+            </div>
+          `;
+        }
+      } else if (q.type === "multi") {
+        const selectedArr = state.answers[q.id] || [];
+        inputHTML = `<div class="options-grid">` + q.options.map((opt, idx) => {
+          const isSelected = selectedArr.includes(opt.value);
+          return `
+            <button type="button" class="option-card ${isSelected ? "selected" : ""}" data-val="${opt.value}">
+              <span class="option-emoji">${opt.emoji}</span>
+              <div class="option-text">
+                <div class="option-title">${opt.label}</div>
+                ${opt.desc ? `<div class="option-desc">${opt.desc}</div>` : ""}
+              </div>
+              <span class="option-key">${isSelected ? "✓" : keys[idx]}</span>
+            </button>
+          `;
+        }).join("") + `</div>`;
+      } else if (q.type === "scale") {
+        const currentVal = state.answers[q.id];
+        const activeItem = q.scale.find(s => s.value === currentVal);
+        inputHTML = `
+          <div class="scale-wrap">
+            <div class="scale-buttons">
+              ${q.scale.map(s => `
+                <button type="button" class="scale-btn ${currentVal === s.value ? "selected" : ""}" data-scale="${s.value}">
+                  <span class="emoji">${s.emoji}</span>
+                  <span class="num">${s.value}</span>
+                </button>
+              `).join("")}
+            </div>
+            <div class="scale-caption" id="scale-caption">
+              ${activeItem ? activeItem.label : "Tap a number from 1 to 5"}
+            </div>
+          </div>
+        `;
+      } else if (q.type === "tags") {
+        const selectedTags = state.answers[q.id] || [];
+        inputHTML = `
+          <div class="tags-cloud">
+            ${q.tags.map(tag => {
+              const isSelected = selectedTags.includes(tag);
+              return `<button type="button" class="tag-pill ${isSelected ? "selected" : ""}" data-tag="${tag}">${isSelected ? "✓ " : ""}${tag}</button>`;
+            }).join("")}
+          </div>
+          <div class="tag-count">${selectedTags.length} selected</div>
+        `;
+      } else if (q.type === "text") {
+        const val = state.answers[q.id] || "";
+        inputHTML = `
+          <input type="text" class="text-input" id="q-text-input" placeholder="${q.placeholder}" value="${val}" autocomplete="off" />
+        `;
+      }
+
+      stageContainer.innerHTML = `
+        <div class="slide ${state.direction === "back" ? "back" : ""}">
+          <span class="q-eyebrow">${q.eyebrow}</span>
+          <h2 class="q-title">${q.title}</h2>
+          <p class="q-subtitle">${q.subtitle}</p>
+          ${inputHTML}
+        </div>
+      `;
+
+      attachQuestionListeners(q);
+    }
+
+    function attachQuestionListeners(q) {
+      if (q.type === "single" || q.type === "single_with_other") {
+        document.querySelectorAll(".option-card").forEach(btn => {
+          btn.addEventListener("click", () => {
+            const val = btn.getAttribute("data-val");
+            state.answers[q.id] = val;
+            if (q.type === "single_with_other" && val === "Other") {
+              render();
+              const otherInput = document.getElementById("other-identity-input");
+              if (otherInput) otherInput.focus();
+              return;
+            }
+            render();
+            if (q.autoAdvance) {
+              setTimeout(() => goNext(), 240);
+            }
+          });
+        });
+
+        const otherInput = document.getElementById("other-identity-input");
+        if (otherInput) {
+          otherInput.addEventListener("input", (e) => {
+            state.otherIdentityText = e.target.value;
+          });
+        }
+      } else if (q.type === "multi") {
+        document.querySelectorAll(".option-card").forEach(btn => {
+          btn.addEventListener("click", () => {
+            const val = btn.getAttribute("data-val");
+            let arr = state.answers[q.id] || [];
+            if (arr.includes(val)) {
+              arr = arr.filter(item => item !== val);
+            } else {
+              if (q.maxSelect && arr.length >= q.maxSelect) {
+                arr.shift();
+              }
+              arr.push(val);
+            }
+            state.answers[q.id] = arr;
+            render();
+          });
+        });
+      } else if (q.type === "scale") {
+        document.querySelectorAll(".scale-btn").forEach(btn => {
+          btn.addEventListener("click", () => {
+            const num = parseInt(btn.getAttribute("data-scale"), 10);
+            state.answers[q.id] = num;
+            render();
+            if (q.autoAdvance) {
+              setTimeout(() => goNext(), 260);
+            }
+          });
+        });
+      } else if (q.type === "tags") {
+        document.querySelectorAll(".tag-pill").forEach(btn => {
+          btn.addEventListener("click", () => {
+            const tag = btn.getAttribute("data-tag");
+            let arr = state.answers[q.id] || [];
+            if (arr.includes(tag)) {
+              arr = arr.filter(t => t !== tag);
+            } else {
+              arr.push(tag);
+            }
+            state.answers[q.id] = arr;
+            render();
+          });
+        });
+      } else if (q.type === "text") {
+        const inp = document.getElementById("q-text-input");
+        if (inp) {
+          inp.focus();
+          inp.addEventListener("input", (e) => {
+            state.answers[q.id] = e.target.value;
+          });
+        }
+      }
+    }
+
+    async function renderResult() {
+      appHeader.style.display = "none";
+      appFooter.style.display = "none";
+
+      const finalAnswers = { ...state.answers };
+      if (finalAnswers.gender_identity === "Other" && state.otherIdentityText.trim()) {
+        finalAnswers.gender_identity = `Other: ${state.otherIdentityText.trim()}`;
+      }
+
+      const arch = computeArchetype(finalAnswers);
+      state.archetype = arch;
+
+      const payload = {
+        submittedAt: new Date().toISOString(),
+        archetype: arch.name,
+        answers: finalAnswers
+      };
+
+      stageContainer.innerHTML = `
+        <div class="slide">
+          <div class="result-card">
+            <span class="archetype-badge">Check-in Complete • Your Builder Profile</span>
+            <span class="archetype-emoji">${arch.emoji}</span>
+            <h1 class="archetype-name serif">${arch.name}</h1>
+            <div class="archetype-tagline">${arch.tagline}</div>
+            <p class="archetype-desc">${arch.description}</p>
+            <div class="trait-row">
+              ${arch.traits.map(t => `<span class="trait-chip"># ${t}</span>`).join("")}
+            </div>
+            <div class="share-actions">
+              <button type="button" class="btn-primary" id="btn-share-img">Save Share Card 📸</button>
+              <button type="button" class="btn-secondary" id="btn-copy-text">Copy Share Text 📋</button>
+            </div>
+            <div class="save-status" id="save-status">Saving your response...</div>
+          </div>
+          <div style="text-align:center;">
+            <button type="button" class="btn-secondary" id="btn-restart" style="font-size:13px; padding: 9px 14px;">Start Over</button>
+          </div>
+        </div>
+      `;
+
+      document.getElementById("btn-share-img").addEventListener("click", downloadArchetypeCard);
+
+      document.getElementById("btn-copy-text").addEventListener("click", async () => {
+        const shareText = `I got "${arch.name}" on the Liffey Founders Club check-in — ${arch.tagline} See you next week!`;
+        await navigator.clipboard.writeText(shareText);
+        const btn = document.getElementById("btn-copy-text");
+        btn.textContent = "Copied! ✓";
+        setTimeout(() => { btn.textContent = "Copy Share Text 📋"; }, 2000);
+      });
+
+      document.getElementById("btn-restart").addEventListener("click", () => {
+        state.screen = "welcome";
+        state.currentIndex = 0;
+        state.answers = { desired_perspectives: [], startup_literacy: [] };
+        state.otherIdentityText = "";
+        render();
+      });
+
+      const res = await submitSurveyData(payload);
+      const statusEl = document.getElementById("save-status");
+      if (statusEl) {
+        statusEl.textContent = res.ok
+          ? "✓ Response recorded — see you at Liffey Founders Club!"
+          : "⚠ Could not reach database (check console for payload).";
+      }
+    }
+
+    function goNext() {
+      const activeQuestions = getActiveQuestions();
+      if (state.currentIndex < activeQuestions.length - 1) {
+        state.direction = "forward";
+        state.currentIndex++;
+        render();
+      } else {
+        state.screen = "result";
+        render();
+      }
+    }
+
+    function goBack() {
+      if (state.currentIndex > 0) {
+        state.direction = "back";
+        state.currentIndex--;
+        render();
+      }
+    }
+
+    function render() {
+      if (state.screen === "welcome") renderWelcome();
+      else if (state.screen === "survey") renderQuestion();
+      else if (state.screen === "result") renderResult();
+    }
+
+    btnNext.addEventListener("click", goNext);
+    btnBack.addEventListener("click", goBack);
+
+    // Keyboard shortcuts (Enter to advance, A-F / 1-5 to select)
+    document.addEventListener("keydown", (e) => {
+      if (state.screen !== "survey") return;
+      if (document.activeElement && document.activeElement.tagName === "INPUT") {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          goNext();
+        }
+        return;
+      }
+
+      if (e.key === "Enter") {
+        e.preventDefault();
+        goNext();
+      }
+
+      const activeQuestions = getActiveQuestions();
+      const q = activeQuestions[state.currentIndex];
+      const keyUpper = e.key.toUpperCase();
+      const letterIdx = ["A", "B", "C", "D", "E", "F"].indexOf(keyUpper);
+
+      if (letterIdx !== -1 && q.options && q.options[letterIdx]) {
+        const cards = document.querySelectorAll(".option-card");
+        if (cards[letterIdx]) cards[letterIdx].click();
+      }
+
+      if (q.type === "scale" && ["1", "2", "3", "4", "5"].includes(e.key)) {
+        const scaleBtn = document.querySelector(`.scale-btn[data-scale="${e.key}"]`);
+        if (scaleBtn) scaleBtn.click();
+      }
+    });
+
+    render();
+  </script>
+</body>
+</html>
