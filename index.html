@@ -737,18 +737,16 @@
      * EVENT CONFIG — UPDATE THIS LINK FOR EACH UPCOMING EVENT
      * ============================================================================
      */
-    const EVENT_SIGNUP_URL = "https://lu.ma/liffeyfoundersclub"; // <-- Swap for each event's signup URL
+    const EVENT_SIGNUP_URL = "https://lu.ma/liffeyfoundersclub";
 
     /**
      * ============================================================================
      * DATABASE SUBMISSION HOOK (Vercel Serverless Proxy -> Supabase)
      * ============================================================================
-     * Posts to /api/submit so your Supabase URL & key stay in Vercel env vars.
      */
     async function submitSurveyData(payload) {
       console.log("LFC Survey Payload:", JSON.stringify(payload, null, 2));
 
-      // Local file:// preview fallback when testing offline before deploying
       if (window.location.protocol === "file:") {
         return { ok: true, mode: "local_demo" };
       }
@@ -916,7 +914,7 @@
         type: "text",
         eyebrow: "Question 10",
         title: "What do you currently do day-to-day?",
-        subtitle: "Role & industry — e.g., "Product Designer in FinTech" or "CS Student".",
+        subtitle: 'Role & industry — e.g., "Product Designer in FinTech" or "CS Student".',
         placeholder: "Type your role and industry..."
       },
       {
@@ -1040,19 +1038,19 @@
 
       const canvas = document.createElement("canvas");
       canvas.width = 1080;
-      canvas.height = 1920;
+      canvas.height = 1080;
       const ctx = canvas.getContext("2d");
 
       // Background
       ctx.fillStyle = "#FAF9F6";
-      ctx.fillRect(0, 0, 1080, 1920);
+      ctx.fillRect(0, 0, 1080, 1080);
 
       // Subtle dot pattern
       ctx.fillStyle = "#DCD8CE";
-      for (let x = 44; x < 1080; x += 38) {
-        for (let y = 44; y < 1920; y += 38) {
+      for (let x = 40; x < 1080; x += 36) {
+        for (let y = 40; y < 1080; y += 36) {
           ctx.beginPath();
-          ctx.arc(x, y, 2.2, 0, Math.PI * 2);
+          ctx.arc(x, y, 2, 0, Math.PI * 2);
           ctx.fill();
         }
       }
@@ -1060,7 +1058,7 @@
       // Main Card Shadow
       ctx.fillStyle = "#171614";
       ctx.beginPath();
-      ctx.roundRect(96, 258, 900, 1340, 48);
+      ctx.roundRect(96, 112, 900, 870, 44);
       ctx.fill();
 
       // Main Card Surface
@@ -1068,71 +1066,62 @@
       ctx.strokeStyle = "#171614";
       ctx.lineWidth = 6;
       ctx.beginPath();
-      ctx.roundRect(80, 240, 900, 1340, 48);
+      ctx.roundRect(80, 96, 900, 870, 44);
       ctx.fill();
       ctx.stroke();
 
       // Header Pill
       ctx.fillStyle = "#CCFBF1";
       ctx.beginPath();
-      ctx.roundRect(140, 310, 410, 56, 28);
+      ctx.roundRect(140, 156, 390, 52, 26);
       ctx.fill();
       ctx.lineWidth = 3;
       ctx.stroke();
 
       ctx.fillStyle = "#0F766E";
-      ctx.font = "800 23px 'Plus Jakarta Sans', sans-serif";
-      ctx.fillText("LIFFEY FOUNDERS CLUB", 170, 346);
+      ctx.font = "800 22px 'Plus Jakarta Sans', sans-serif";
+      ctx.fillText("LIFFEY FOUNDERS CLUB", 168, 190);
 
       // Emoji
-      ctx.font = "130px sans-serif";
-      ctx.fillText(arch.emoji, 140, 520);
+      ctx.font = "110px sans-serif";
+      ctx.fillText(arch.emoji, 140, 340);
 
       // Archetype Title
       ctx.fillStyle = "#171614";
-      ctx.font = "400 88px 'Instrument Serif', Georgia, serif";
-      wrapCanvasText(ctx, arch.name, 140, 640, 780, 96);
+      ctx.font = "400 78px 'Instrument Serif', Georgia, serif";
+      ctx.fillText(arch.name, 140, 440);
 
       // Tagline
       ctx.fillStyle = "#D94120";
-      ctx.font = "700 34px 'Plus Jakarta Sans', sans-serif";
-      wrapCanvasText(ctx, arch.tagline, 140, 825, 780, 48);
+      ctx.font = "700 30px 'Plus Jakarta Sans', sans-serif";
+      wrapCanvasText(ctx, arch.tagline, 140, 505, 780, 42);
 
       // Description
       ctx.fillStyle = "#5E5B55";
-      ctx.font = "500 32px 'Plus Jakarta Sans', sans-serif";
-      wrapCanvasText(ctx, arch.description, 140, 965, 780, 48);
+      ctx.font = "500 28px 'Plus Jakarta Sans', sans-serif";
+      wrapCanvasText(ctx, arch.description, 140, 610, 780, 42);
 
       // Trait Chips
       let chipX = 140;
-      let chipY = 1280;
-      ctx.font = "700 26px 'Plus Jakarta Sans', sans-serif";
+      const chipY = 815;
+      ctx.font = "700 24px 'Plus Jakarta Sans', sans-serif";
       arch.traits.forEach(trait => {
         const textW = ctx.measureText(trait).width;
-        const boxW = textW + 46;
-        if (chipX + boxW > 920) {
-          chipX = 140;
-          chipY += 74;
-        }
+        const boxW = textW + 44;
         ctx.fillStyle = "#F3F1EC";
         ctx.strokeStyle = "#171614";
         ctx.lineWidth = 3;
         ctx.beginPath();
-        ctx.roundRect(chipX, chipY, boxW, 58, 16);
+        ctx.roundRect(chipX, chipY, boxW, 54, 16);
         ctx.fill();
         ctx.stroke();
 
         ctx.fillStyle = "#171614";
-        ctx.fillText(trait, chipX + 23, chipY + 38);
+        ctx.fillText(trait, chipX + 22, chipY + 35);
         chipX += boxW + 18;
       });
 
-      // Footer prompt on card
-      ctx.fillStyle = "#5E5B55";
-      ctx.font = "700 24px 'Plus Jakarta Sans', sans-serif";
-      ctx.fillText("See you at the next Liffey Founders Club • Dublin", 140, 1510);
-
-      // Trigger mobile Web Share (for Stories) or direct PNG download
+      // Trigger download or mobile Web Share
       canvas.toBlob(async (blob) => {
         const file = new File([blob], "liffey-founders-archetype.png", { type: "image/png" });
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
@@ -1140,7 +1129,7 @@
             await navigator.share({
               files: [file],
               title: `My Liffey Founders Club Profile: ${arch.name}`,
-              text: `I got "${arch.name}" on the Liffey Founders Club check-in! Join us: ${EVENT_SIGNUP_URL}`
+              text: `I got "${arch.name}" on the Liffey Founders Club check-in!`
             });
             return;
           } catch (e) { /* Fallback to download if cancelled */ }
@@ -1460,7 +1449,7 @@
         try {
           await navigator.clipboard.writeText(`${sharePostText} ${EVENT_SIGNUP_URL}`);
           toastEl.textContent = "Post caption copied — paste it into LinkedIn!";
-        } catch (e) { /* Ignore clipboard errors in restricted frames */ }
+        } catch (e) {}
         const liUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(EVENT_SIGNUP_URL)}`;
         window.open(liUrl, "_blank", "noopener,noreferrer");
       });
