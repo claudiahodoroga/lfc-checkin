@@ -612,16 +612,74 @@
       font-weight: 700;
     }
 
-    .share-actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      padding-top: 16px;
+    .share-section {
+      padding-top: 18px;
       border-top: 1.5px dashed var(--border);
     }
 
+    .social-strip-label {
+      font-size: 11.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--ink-muted);
+      text-align: center;
+      margin: 18px 0 10px;
+    }
+
+    .social-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .social-btn {
+      background: var(--surface);
+      color: var(--ink);
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      padding: 10px 6px;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      box-shadow: 0 2px 0 var(--ink);
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+
+    .social-btn:hover {
+      background: var(--surface-subtle);
+      transform: translateY(-1px);
+      box-shadow: 0 3px 0 var(--ink);
+    }
+
+    .social-btn:active {
+      transform: translateY(1px);
+      box-shadow: 0 1px 0 var(--ink);
+    }
+
+    .social-btn svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    .share-toast {
+      margin-top: 10px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--accent-dark);
+      text-align: center;
+      min-height: 18px;
+    }
+
     .save-status {
-      margin-top: 12px;
+      margin-top: 10px;
       font-size: 13px;
       font-weight: 600;
       color: var(--teal);
@@ -632,7 +690,7 @@
     @media (max-width: 480px) {
       .option-key, .hint-text { display: none; }
       .welcome-box { padding: 28px 20px; }
-      .share-actions { grid-template-columns: 1fr; }
+      .social-row { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
@@ -674,6 +732,13 @@
   </footer>
 
   <script>
+    /**
+     * ============================================================================
+     * EVENT CONFIG — UPDATE THIS LINK FOR EACH UPCOMING EVENT
+     * ============================================================================
+     */
+    const EVENT_SIGNUP_URL = "https://lu.ma/liffeyfoundersclub"; // <-- Swap for each event's signup URL
+
     /**
      * ============================================================================
      * DATABASE SUBMISSION HOOK (Vercel Serverless Proxy -> Supabase)
@@ -851,7 +916,7 @@
         type: "text",
         eyebrow: "Question 10",
         title: "What do you currently do day-to-day?",
-        subtitle: "Role & industry — e.g., 'Product Designer in FinTech' or 'CS Student'.",
+        subtitle: "Role & industry — e.g., "Product Designer in FinTech" or "CS Student".",
         placeholder: "Type your role and industry..."
       },
       {
@@ -975,19 +1040,19 @@
 
       const canvas = document.createElement("canvas");
       canvas.width = 1080;
-      canvas.height = 1080;
+      canvas.height = 1920;
       const ctx = canvas.getContext("2d");
 
       // Background
       ctx.fillStyle = "#FAF9F6";
-      ctx.fillRect(0, 0, 1080, 1080);
+      ctx.fillRect(0, 0, 1080, 1920);
 
       // Subtle dot pattern
       ctx.fillStyle = "#DCD8CE";
-      for (let x = 40; x < 1080; x += 36) {
-        for (let y = 40; y < 1080; y += 36) {
+      for (let x = 44; x < 1080; x += 38) {
+        for (let y = 44; y < 1920; y += 38) {
           ctx.beginPath();
-          ctx.arc(x, y, 2, 0, Math.PI * 2);
+          ctx.arc(x, y, 2.2, 0, Math.PI * 2);
           ctx.fill();
         }
       }
@@ -995,7 +1060,7 @@
       // Main Card Shadow
       ctx.fillStyle = "#171614";
       ctx.beginPath();
-      ctx.roundRect(96, 112, 900, 870, 44);
+      ctx.roundRect(96, 258, 900, 1340, 48);
       ctx.fill();
 
       // Main Card Surface
@@ -1003,62 +1068,71 @@
       ctx.strokeStyle = "#171614";
       ctx.lineWidth = 6;
       ctx.beginPath();
-      ctx.roundRect(80, 96, 900, 870, 44);
+      ctx.roundRect(80, 240, 900, 1340, 48);
       ctx.fill();
       ctx.stroke();
 
       // Header Pill
       ctx.fillStyle = "#CCFBF1";
       ctx.beginPath();
-      ctx.roundRect(140, 156, 390, 52, 26);
+      ctx.roundRect(140, 310, 410, 56, 28);
       ctx.fill();
       ctx.lineWidth = 3;
       ctx.stroke();
 
       ctx.fillStyle = "#0F766E";
-      ctx.font = "800 22px 'Plus Jakarta Sans', sans-serif";
-      ctx.fillText("LIFFEY FOUNDERS CLUB", 168, 190);
+      ctx.font = "800 23px 'Plus Jakarta Sans', sans-serif";
+      ctx.fillText("LIFFEY FOUNDERS CLUB", 170, 346);
 
       // Emoji
-      ctx.font = "110px sans-serif";
-      ctx.fillText(arch.emoji, 140, 340);
+      ctx.font = "130px sans-serif";
+      ctx.fillText(arch.emoji, 140, 520);
 
       // Archetype Title
       ctx.fillStyle = "#171614";
-      ctx.font = "400 78px 'Instrument Serif', Georgia, serif";
-      ctx.fillText(arch.name, 140, 440);
+      ctx.font = "400 88px 'Instrument Serif', Georgia, serif";
+      wrapCanvasText(ctx, arch.name, 140, 640, 780, 96);
 
       // Tagline
       ctx.fillStyle = "#D94120";
-      ctx.font = "700 30px 'Plus Jakarta Sans', sans-serif";
-      wrapCanvasText(ctx, arch.tagline, 140, 505, 780, 42);
+      ctx.font = "700 34px 'Plus Jakarta Sans', sans-serif";
+      wrapCanvasText(ctx, arch.tagline, 140, 825, 780, 48);
 
       // Description
       ctx.fillStyle = "#5E5B55";
-      ctx.font = "500 28px 'Plus Jakarta Sans', sans-serif";
-      wrapCanvasText(ctx, arch.description, 140, 610, 780, 42);
+      ctx.font = "500 32px 'Plus Jakarta Sans', sans-serif";
+      wrapCanvasText(ctx, arch.description, 140, 965, 780, 48);
 
       // Trait Chips
       let chipX = 140;
-      const chipY = 815;
-      ctx.font = "700 24px 'Plus Jakarta Sans', sans-serif";
+      let chipY = 1280;
+      ctx.font = "700 26px 'Plus Jakarta Sans', sans-serif";
       arch.traits.forEach(trait => {
         const textW = ctx.measureText(trait).width;
-        const boxW = textW + 44;
+        const boxW = textW + 46;
+        if (chipX + boxW > 920) {
+          chipX = 140;
+          chipY += 74;
+        }
         ctx.fillStyle = "#F3F1EC";
         ctx.strokeStyle = "#171614";
         ctx.lineWidth = 3;
         ctx.beginPath();
-        ctx.roundRect(chipX, chipY, boxW, 54, 16);
+        ctx.roundRect(chipX, chipY, boxW, 58, 16);
         ctx.fill();
         ctx.stroke();
 
         ctx.fillStyle = "#171614";
-        ctx.fillText(trait, chipX + 22, chipY + 35);
+        ctx.fillText(trait, chipX + 23, chipY + 38);
         chipX += boxW + 18;
       });
 
-      // Trigger download or mobile Web Share
+      // Footer prompt on card
+      ctx.fillStyle = "#5E5B55";
+      ctx.font = "700 24px 'Plus Jakarta Sans', sans-serif";
+      ctx.fillText("See you at the next Liffey Founders Club • Dublin", 140, 1510);
+
+      // Trigger mobile Web Share (for Stories) or direct PNG download
       canvas.toBlob(async (blob) => {
         const file = new File([blob], "liffey-founders-archetype.png", { type: "image/png" });
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
@@ -1066,7 +1140,7 @@
             await navigator.share({
               files: [file],
               title: `My Liffey Founders Club Profile: ${arch.name}`,
-              text: `I got "${arch.name}" on the Liffey Founders Club check-in!`
+              text: `I got "${arch.name}" on the Liffey Founders Club check-in! Join us: ${EVENT_SIGNUP_URL}`
             });
             return;
           } catch (e) { /* Fallback to download if cancelled */ }
@@ -1346,9 +1420,28 @@
             <div class="trait-row">
               ${arch.traits.map(t => `<span class="trait-chip"># ${t}</span>`).join("")}
             </div>
-            <div class="share-actions">
-              <button type="button" class="btn-primary" id="btn-share-img">Save Share Card 📸</button>
-              <button type="button" class="btn-secondary" id="btn-copy-text">Copy Share Text 📋</button>
+            <div class="share-section">
+              <button type="button" class="btn-primary" id="btn-save-results">Save results</button>
+              <div class="social-strip-label">Share the next event</div>
+              <div class="social-row">
+                <button type="button" class="social-btn" id="btn-share-linkedin" aria-label="Share on LinkedIn">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/></svg>
+                  LinkedIn
+                </button>
+                <button type="button" class="social-btn" id="btn-share-x" aria-label="Share on X">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                  X
+                </button>
+                <button type="button" class="social-btn" id="btn-share-threads" aria-label="Share on Threads">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221Z"/></svg>
+                  Threads
+                </button>
+                <button type="button" class="social-btn" id="btn-copy-link" aria-label="Copy event link">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                  Copy link
+                </button>
+              </div>
+              <div class="share-toast" id="share-toast"></div>
             </div>
             <div class="save-status" id="save-status">Saving your response...</div>
           </div>
@@ -1358,14 +1451,41 @@
         </div>
       `;
 
-      document.getElementById("btn-share-img").addEventListener("click", downloadArchetypeCard);
+      const sharePostText = `Heading to the next Liffey Founders Club in Dublin (my builder profile: ${arch.name}). Come along if you're building or exploring ideas:`;
+      const toastEl = document.getElementById("share-toast");
 
-      document.getElementById("btn-copy-text").addEventListener("click", async () => {
-        const shareText = `I got "${arch.name}" on the Liffey Founders Club check-in — ${arch.tagline} See you next week!`;
-        await navigator.clipboard.writeText(shareText);
-        const btn = document.getElementById("btn-copy-text");
-        btn.textContent = "Copied! ✓";
-        setTimeout(() => { btn.textContent = "Copy Share Text 📋"; }, 2000);
+      document.getElementById("btn-save-results").addEventListener("click", downloadArchetypeCard);
+
+      document.getElementById("btn-share-linkedin").addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(`${sharePostText} ${EVENT_SIGNUP_URL}`);
+          toastEl.textContent = "Post caption copied — paste it into LinkedIn!";
+        } catch (e) { /* Ignore clipboard errors in restricted frames */ }
+        const liUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(EVENT_SIGNUP_URL)}`;
+        window.open(liUrl, "_blank", "noopener,noreferrer");
+      });
+
+      document.getElementById("btn-share-x").addEventListener("click", () => {
+        const xUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(sharePostText)}&url=${encodeURIComponent(EVENT_SIGNUP_URL)}`;
+        window.open(xUrl, "_blank", "noopener,noreferrer");
+      });
+
+      document.getElementById("btn-share-threads").addEventListener("click", () => {
+        const threadsText = `${sharePostText} ${EVENT_SIGNUP_URL}`;
+        const threadsUrl = `https://www.threads.net/intent/post?text=${encodeURIComponent(threadsText)}`;
+        window.open(threadsUrl, "_blank", "noopener,noreferrer");
+      });
+
+      document.getElementById("btn-copy-link").addEventListener("click", async () => {
+        await navigator.clipboard.writeText(EVENT_SIGNUP_URL);
+        const btn = document.getElementById("btn-copy-link");
+        const originalHTML = btn.innerHTML;
+        btn.textContent = "Copied ✓";
+        toastEl.textContent = "Event signup link copied to clipboard.";
+        setTimeout(() => {
+          btn.innerHTML = originalHTML;
+          toastEl.textContent = "";
+        }, 2200);
       });
 
       document.getElementById("btn-restart").addEventListener("click", () => {
